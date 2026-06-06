@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dash.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Welcome,<span id="username">user</h2>
+                <div class="balance-box">
+                    <p>Balance</p>
+                    <h1>$<span id="balance">0</span></h1>
+                </div>
+                <!--Deposit-->
+                <div class="action-box">
+                    <h3>Deposit</h3>
+                    <input type="number" id="depositAmount" placeholder="Enter amount">
+                    <button onclick="deposit()">Deposit</button>
+                </div>
+
+                <!--Withdraw-->
+                <div class="action-box">
+                    <h3>Withdraw</h3>
+                    <input type="number" id="withdrawAmount" placeholder="Enter amount">
+                    <button onclick="withdraw()">WithDraw</button>
+                </div>
+
+                <!--Transfer-->
+                <div class="action-box">
+                    <h3>Transfer</h3>
+                    <input type="text" id="transferUser" placeholder="Receiver name"><br>
+                    <input type="number" id="transferAmount" placeholder="Enter amount">
+                    <button onclick="transfer()">Transfer</button>
+                </div>
+
+                
+
+        </div>
+    </div>
+    <script src="dash.js"></script>
+</body>
+</html>
