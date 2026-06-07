@@ -74,10 +74,10 @@ function withdraw(){
 }
 function transfer(){
     const toUser=document.getElementById("transferUser").value;
-    const amount=document.getElementById("withdrawAmount").value;
+    const amount=document.getElementById("transferAmount").value;
     const username =localStorage.getItem("username");
 
-    if(!amount ||!toUser|| amount<=0){
+    if(!amount || amount<=0){
         alert("Enter valid amount");
         return;
     }

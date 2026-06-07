@@ -18,20 +18,42 @@ public class LoginService {
     }
 
     public void depositAmount(String name,BigDecimal amount) {
-        User user=repo.findByUsername(name).orElse(new User());
+        User user=repo.findByUsername(name).get();
         user.setBalance(user.getBalance().add(amount));
         repo.save(user);
     }
 
-    public void withDraw(String name,BigDecimal amount){
-      User user=repo.findByUsername(name).orElse(new User());
-      user.setBalance(user.getBalance().subtract(amount));
-      repo.save(user);
+    public String withDraw(String name,BigDecimal amount){
+      User user=repo.findByUsername(name).get();
+      if(user.getBalance().compareTo(amount)>=0) {
+          user.setBalance(user.getBalance().subtract(amount));
+          repo.save(user);
+          return amount+"Withdrawn";
+      }
+      return "low balance";
     }
 
     public BigDecimal getBalance(String username) {
         User user=repo.findByUsername(username).orElse(new User());
         return user.getBalance();
 
+    }
+
+    public String transfer(String sender, String receiver, BigDecimal amount) {
+        User fromUser=repo.findByUsername(sender).get();
+        if(repo.findByUsername(receiver).isPresent()) {
+            User toUser = repo.findByUsername(receiver).get();
+            if (fromUser.getBalance().compareTo(amount)>=0) {
+                toUser.setBalance(toUser.getBalance().add(amount));
+                fromUser.setBalance(toUser.getBalance().subtract(amount));
+                repo.save(toUser);
+                repo.save(fromUser);
+                return amount + "transferred to " + receiver;
+            } else {
+                return "Low balance";
+            }
+        }else{
+            return "No such User";
+        }
     }
 }

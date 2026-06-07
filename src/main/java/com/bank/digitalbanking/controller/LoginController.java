@@ -3,6 +3,7 @@ package com.bank.digitalbanking.controller;
 
 import com.bank.digitalbanking.dto.LoginRequest;
 import com.bank.digitalbanking.dto.TransactionRequest;
+import com.bank.digitalbanking.dto.TransferRequest;
 import com.bank.digitalbanking.model.User;
 import com.bank.digitalbanking.service.LoginService;
 import org.apache.catalina.connector.Response;
@@ -45,7 +46,13 @@ public class LoginController {
     }
     @PostMapping("/withdraw")
     public ResponseEntity<String> withDraw(@RequestBody TransactionRequest request){
-        service.withDraw(request.username(),request.amount());
-        return ResponseEntity.ok( "Withdrawn..");
+        String msg=service.withDraw(request.username(),request.amount());
+        return ResponseEntity.ok( msg);
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<String> tranfer(@RequestBody TransferRequest request){
+        String msg=service.transfer(request.fromUser(),request.toUser(),request.amount());
+        return ResponseEntity.ok(msg);
     }
 }
