@@ -2,6 +2,7 @@ package com.bank.digitalbanking.controller;
 
 
 import com.bank.digitalbanking.dto.LoginRequest;
+import com.bank.digitalbanking.dto.SignupRequest;
 import com.bank.digitalbanking.dto.TransactionRequest;
 import com.bank.digitalbanking.dto.TransferRequest;
 import com.bank.digitalbanking.model.User;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/bank")
@@ -54,5 +56,16 @@ public class LoginController {
     public ResponseEntity<String> tranfer(@RequestBody TransferRequest request){
         String msg=service.transfer(request.fromUser(),request.toUser(),request.amount());
         return ResponseEntity.ok(msg);
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<String> signUp(@RequestBody SignupRequest request){
+        String msg=service.signUp(request.name(),request.mpin());
+
+        if(msg.equals("ok")) {
+            return ResponseEntity.ok("Registration Successful");
+        }else{
+            return ResponseEntity.ok("User Exists");
+        }
     }
 }

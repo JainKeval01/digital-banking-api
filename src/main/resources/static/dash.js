@@ -39,6 +39,7 @@ function deposit(){
     .then(result=>{
         alert(result);
         refreshDashBoardData();
+        document.getElementById("depositAmount").value="";
     }).catch(err=>{
         alert("Error connecting to server");
     });
@@ -68,6 +69,7 @@ function withdraw(){
     .then(result=>{
         alert(result);
         refreshDashBoardData();
+        document.getElementById("withdrawAmount").value="";
     }).catch(err=>{
         alert("Error connecting to server");
     });
@@ -97,6 +99,8 @@ function transfer(){
     .then(result=>{
         alert(result);
         refreshDashBoardData();
+        document.getElementById("transferAmount").value="";
+        document.getElementById("transferUser").value="";
     }).catch(err=>{
         alert("Error connecting to server");
     });

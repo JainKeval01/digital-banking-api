@@ -45,7 +45,7 @@ public class LoginService {
             User toUser = repo.findByUsername(receiver).get();
             if (fromUser.getBalance().compareTo(amount)>=0) {
                 toUser.setBalance(toUser.getBalance().add(amount));
-                fromUser.setBalance(toUser.getBalance().subtract(amount));
+                fromUser.setBalance(fromUser.getBalance().subtract(amount));
                 repo.save(toUser);
                 repo.save(fromUser);
                 return amount + "transferred to " + receiver;
@@ -54,6 +54,19 @@ public class LoginService {
             }
         }else{
             return "No such User";
+        }
+    }
+
+    public String signUp(String username,String mpin) {
+        if (repo.findByUsername(username).isEmpty()) {
+            User user = new User();
+            user.setMpin(mpin);
+            user.setUsername(username);
+            user.setBalance(BigDecimal.ZERO);
+            repo.save(user);
+            return "ok";
+        }else {
+            return "not ok";
         }
     }
 }
