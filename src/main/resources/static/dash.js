@@ -16,6 +16,14 @@ window.onload=function(){
     refreshDashBoardData();
 }
 
+function logout() {
+    localStorage.removeItem("username"); // only remove user session
+
+    alert("Logged out successfully");
+
+    window.location.href = "login.html"; // back to login page
+}
+
 function deposit(){
     const amount=document.getElementById("depositAmount").value;
     const username =localStorage.getItem("username");
