@@ -5,6 +5,7 @@ import com.bank.digitalbanking.dto.LoginRequest;
 import com.bank.digitalbanking.dto.SignupRequest;
 import com.bank.digitalbanking.dto.TransactionRequest;
 import com.bank.digitalbanking.dto.TransferRequest;
+import com.bank.digitalbanking.model.Transactions;
 import com.bank.digitalbanking.model.User;
 import com.bank.digitalbanking.service.LoginService;
 import org.apache.catalina.connector.Response;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -67,5 +69,10 @@ public class LoginController {
         }else{
             return ResponseEntity.ok("User Exists");
         }
+    }
+
+    @GetMapping("/transactions/{username}")
+    public List<Transactions> transactionsList(@PathVariable String username) {
+        return service.getTransactionsList(username);
     }
 }

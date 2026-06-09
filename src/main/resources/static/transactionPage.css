@@ -1,0 +1,36 @@
+.transaction-item {
+    display: flex;
+    justify-content: space-between; /* Pushes the type/msg to the left, and amount to the right */
+    align-items: center;
+    padding: 12px 5px;
+    border-bottom: 1px solid #eef2f7; /* Crisp, thin separator line between list elements */
+}
+
+.transaction-item:last-child {
+    border-bottom: none; /* Removes the border line on the final element for a clean finish */
+}
+
+.tx-left {
+    text-align: left;
+}
+
+.tx-title {
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+    font-size: 15px;
+}
+
+.tx-desc {
+    font-size: 13px;
+    color: #718096;
+    margin: 3px 0 0 0;
+}
+
+.tx-amount {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.text-success { color: #2f855a; }
+.text-danger { color: #c53030; }

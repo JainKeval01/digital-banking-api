@@ -105,3 +105,7 @@ function transfer(){
         alert("Error connecting to server");
     });
 }
+
+function viewTransactions(){
+    window.location.href="transactionPage.html";
+}
