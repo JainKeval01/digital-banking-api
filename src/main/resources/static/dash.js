@@ -1,5 +1,5 @@
 function refreshDashBoardData(){
- const username=localStorage.getItem("username");
+ const username=sessionStorage.getItem("username");
     document.getElementById("username").innerText=username;
 
     fetch("/bank/balance/"+username)
@@ -17,7 +17,7 @@ window.onload=function(){
 }
 
 function logout() {
-    localStorage.removeItem("username"); // only remove user session
+   sessionStorage.clear();
 
     alert("Logged out successfully");
 

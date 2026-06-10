@@ -1,5 +1,6 @@
 package com.bank.digitalbanking.service;
 
+import com.bank.digitalbanking.exception.UserNotFoundException;
 import com.bank.digitalbanking.model.Transactions;
 import com.bank.digitalbanking.model.User;
 import com.bank.digitalbanking.repo.TransactionRepo;
@@ -33,14 +34,14 @@ public class LoginService {
     }
 
     public void depositAmount(String name,BigDecimal amount) {
-        User user=repo.findByUsername(name).get();
+        User user=repo.findByUsername(name).orElseThrow(()->new UserNotFoundException("user not found"));
         user.setBalance(user.getBalance().add(amount));
         saveTransactions(name,"Deposit",amount,"Deposited "+amount);
         repo.save(user);
     }
 
     public String withDraw(String name,BigDecimal amount){
-      User user=repo.findByUsername(name).get();
+      User user=repo.findByUsername(name).orElseThrow(()->new UserNotFoundException("user not found"));
       if(user.getBalance().compareTo(amount)>=0) {
           user.setBalance(user.getBalance().subtract(amount));
           repo.save(user);
@@ -51,13 +52,13 @@ public class LoginService {
     }
 
     public BigDecimal getBalance(String username) {
-        User user=repo.findByUsername(username).orElse(new User());
+        User user=repo.findByUsername(username).orElseThrow(()->new UserNotFoundException("user not found"));
         return user.getBalance();
 
     }
 
     public String transfer(String sender, String receiver, BigDecimal amount) {
-        User fromUser=repo.findByUsername(sender).get();
+        User fromUser=repo.findByUsername(sender).orElseThrow(()->new UserNotFoundException("user not found"));
         if(repo.findByUsername(receiver).isPresent()) {
             User toUser = repo.findByUsername(receiver).get();
             if (fromUser.getBalance().compareTo(amount)>=0) {

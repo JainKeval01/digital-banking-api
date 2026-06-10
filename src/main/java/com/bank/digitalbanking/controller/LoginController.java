@@ -27,12 +27,8 @@ public class LoginController {
 
     @GetMapping("/balance/{username}")
     public ResponseEntity<String> showBalance(@PathVariable String username){
-        try{
-            BigDecimal balance=service.getBalance(username);
-            return ResponseEntity.ok(balance.toString());
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
-        }
+        BigDecimal balance=service.getBalance(username);
+        return ResponseEntity.ok(balance.toString());
     }
     @PostMapping("/login")
     public String showUser(@RequestBody LoginRequest request){

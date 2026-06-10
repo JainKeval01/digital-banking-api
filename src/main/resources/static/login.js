@@ -22,7 +22,7 @@ document.getElementById("loginform").addEventListener("submit", function(event) 
     }).then(response => response.text())
      .then(serverMessage=>{
         if(serverMessage === "Login successful"){
-            localStorage.setItem("username",username);
+            sessionStorage.setItem("username",username);
             window.location.href = "dashboard.html";
         }else{
             alert(serverMessage);
